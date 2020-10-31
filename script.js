@@ -72,7 +72,7 @@ function saveReminders() {
 
 // calendar date in header 
 function getHeaderDate() {
-   // var currentHeaderDate = moment().format('MMMM, Do, YYYY');
+   var currentHeaderDate = moment().format('MMMM, Do, YYYY');
     $("#currentDay").text(currentHeaderDate);
 }
 
