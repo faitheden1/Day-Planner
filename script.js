@@ -86,12 +86,12 @@ function displayReminders() {
     })
 }
 
-// sets any existing localStorage data to the view if it exists
+// localstorage data to view 
 function init() {
-    var storedDay = JSON.parse(localStorage.getItem("theDay"));
+    var dayStored = JSON.parse(localStorage.getItem("theDay"));
 
-    if (storedDay) {
-        myDay = storedDay;
+    if (dayStored) {
+        myDay = dayStored;
     }
 
     saveReminders();
@@ -107,49 +107,49 @@ theDay.forEach(function(thisHour) {
     $(".container").append(hourRow);
 
     // creates time field
-    var hourField = $("<div>")
+    var hourbox = $("<div>")
         .text(`${thisHour.hour}${thisHour.meridiem}`)
         .attr({
             "class": "col-md-2 hour"
     });
 
-    // creates schdeduler data
-    var hourPlan = $("<div>")
+    // data of schedule
+    var hour = $("<div>")
         .attr({
             "class": "col-md-9 description p-0"
         });
-    var planData = $("<textarea>");
-    hourPlan.append(planData);
-    planData.attr("id", thisHour.id);
+    var data = $("<textarea>");
+    hour.append(data);
+    data.attr("id", thisHour.id);
     if (thisHour.time < moment().format("HH")) {
-        planData.attr ({
-            "class": "past", 
+        data.attr ({
+            "class": "past col-md-12", 
         })
     } else if (thisHour.time === moment().format("HH")) {
-        planData.attr({
-            "class": "present"
+        data.attr({
+            "class": "present col-md-12"
         })
     } else if (thisHour.time > moment().format("HH")) {
-        planData.attr({
-            "class": "future"
+        data.attr({
+            "class": "future col-md-12"
         })
     }
 
-    // creates save button
+    // save button
     var saveButton = $("<i class='far fa-save fa-lg'></i>")
-    var savePlan = $("<button>")
+    var save = $("<button>")
         .attr({
             "class": "col-md-1 saveBtn"
     });
-    savePlan.append(saveButton);
-    hourRow.append(hourField, hourPlan, savePlan);
+    save.append(saveButton);
+    hourRow.append(hourbox, hour, save);
 })
 
-// loads any existing localstorage data after components created
+// localstorage data for components 
 init();
 
 
-// saves data to be used in localStorage
+// localstorage data saved 
 $(".saveBtn").on("click", function(event) {
     event.preventDefault();
     var saveIndex = $(this).siblings(".description").children(".future").attr("id");
