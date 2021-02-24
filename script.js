@@ -1,3 +1,13 @@
+
+
+
+
+
+
+
+
+
+
 // variable to store and loop through scheduler
 var myDay = [
     {
@@ -86,17 +96,18 @@ function displayReminders() {
 
 // sets any existing localStorage data to the view if it exists
 function init() {
-    var storedDay = JSON.parse(localStorage.setItem("myDay","myValue"));
+    var storedDay = JSON.parse(localStorage.getItem("myDay"));
 
     if (storedDay) {
         myDay = storedDay;
     }
+    
 
     saveReminders();
     displayReminders();
     console.log(storedDay)
     console.log(myDay)
-    console.log(value)
+    // console.log(value)
 }
 
 // loads header date
@@ -163,16 +174,20 @@ $(".saveBtn").on("click", function(event) {
     // var saveIndex = $(this).siblings(".description").children(".future").attr("id");
     console.log(saveIndex);
     console.log(myDay)
-    myDay[saveIndex].reminder = $(this).siblings(".description").children(".future").val();
+    console.log($("#"+saveIndex).val())
+    myDay[saveIndex].reminder = $("#"+saveIndex).val()
+    console.log(myDay)
     // loads any existing localstorage data after components created
-init();
+// init();
 
     saveReminders();
+     // loads any existing localstorage data after components created
+init();
+
     displayReminders();
 });
 
-
-// localStorage.get(“my”)
+// localStorage.get(“my”) 
 
 
 
